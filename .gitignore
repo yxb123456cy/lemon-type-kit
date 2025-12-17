@@ -9,6 +9,5 @@ dist/
 storybook-static
 
 # IDE
-.vscode/*
-!.vscode/extensions.json
+
 .idea
