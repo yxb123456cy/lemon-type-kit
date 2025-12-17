@@ -65,7 +65,7 @@ echo "✅ 暂存区文件处理完成"
 
 echo "🧪 运行全量测试..."
 
-pnpm test  # 对应 package.json 中 "test": "vitest run"
+pnpm test:unit  # 对应 package.json 中 "test": "vitest run"
 
 echo "✅ 全量测试通过"
 
