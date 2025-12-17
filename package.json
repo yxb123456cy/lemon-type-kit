@@ -15,18 +15,28 @@
     "dist"
   ],
   "scripts": {
+    "type-check": "tsc --noEmit",
     "build": "rslib build",
     "check": "biome check --write",
     "dev": "rslib build --watch",
     "format": "biome format --write",
     "test": "vitest run",
-    "commit": "git-cz"
+    "commit": "git-cz",
+    "release:changelog:major": "standard-version --release-as major",
+    "release:changelog:minor": "standard-version --release-as minor",
+    "release:changelog:patch": "standard-version --release-as patch",
+    "prepare": "husky"
   },
   "devDependencies": {
     "@biomejs/biome": "2.3.8",
+    "@commitlint/cli": "^20.2.0",
+    "@commitlint/config-conventional": "^20.2.0",
     "@rslib/core": "^0.18.4",
     "@types/node": "^24.10.1",
     "cz-git": "^1.12.0",
+    "husky": "^9.1.7",
+    "lint-staged": "^16.2.7",
+    "standard-version": "^9.5.0",
     "typescript": "^5.9.3",
     "vitest": "^4.0.15"
   },
@@ -35,6 +45,12 @@
       "path": "node_modules/cz-git",
       "useEmoji": true
     }
+  },
+  "lint-staged": {
+    "src/**/*.{js,jsx,ts,tsx,json}": [
+      "biome check --write",
+      "biome format --write"
+    ]
   },
   "private": true
 }

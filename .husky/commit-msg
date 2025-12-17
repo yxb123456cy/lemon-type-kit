@@ -1,0 +1,6 @@
+#!/usr/bin/env sh
+. "$(dirname -- "$0")/_/husky.sh"
+
+# 用 commitlint 检查提交信息（$1 是临时文件路径，包含提交信息内容）
+echo "🔍commit msg check ..."
+npx commitlint --edit "$1"
