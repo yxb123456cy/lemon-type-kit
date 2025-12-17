@@ -1,23 +1,176 @@
-# Rslib project
+# 🍋 Type Kit
 
-## Setup
+**Type Kit** 是一个 **通用、现代化的 TypeScript 类型与工具函数库**，专注于为前端与 Node.js 项目提供 **强类型、可复用、可组合的基础能力**。
 
-Install the dependencies:
+该项目遵循 **Type-first / 零业务依赖 / 模块化导出** 的设计理念，适用于 **任何使用 TypeScript 的项目或团队**，既可作为企业内共享基础库，也可作为独立 npm 包使用。
 
-```bash
-pnpm install
+---
+
+## 🚀 项目定位
+
+> 一个 **工程级、可 Tree-shaking 的 TypeScript 基础工具库**
+
+* 🧩 高质量 **Type Utilities（类型工具）**
+* 🧱 常用 **Runtime Utilities（函数工具）**
+* 🔄 同时支持 Browser 与 Node.js 环境
+* 📦 支持按模块导入，避免无用代码
+* 🧠 类型即文档（Type as Documentation）
+
+---
+
+## 📦 适用场景
+
+* Vue / React / Svelte 等前端项目
+* Node.js / BFF / CLI 工具
+* Monorepo 中的 shared 基础包
+* 中大型 TypeScript 工程
+* 企业级前后端统一工具库
+
+---
+
+## 📁 目录结构
+
+```txt
+type-kit
+├─ core/            # 核心基础函数（零依赖）
+├─ type/            # 纯 TypeScript 类型工具（无 runtime）
+├─ object/          # 对象操作
+├─ array/           # 数组工具
+├─ string/          # 字符串处理
+├─ number/          # 数值工具
+├─ date/            # 日期时间
+├─ function/        # 函数增强
+├─ async/           # 异步控制
+├─ collection/      # 集合工具
+├─ validation/      # 校验工具
+├─ env/             # 运行环境判断
+├─ browser/         # 浏览器专用能力
+├─ storage/         # 本地存储封装
+├─ network/         # 网络辅助方法
+└─ index.ts
 ```
 
-## Get started
+---
 
-Build the library:
+## 📚 核心模块说明
+
+### type（⭐ 核心模块）
+
+* `Nullable<T>` / `DeepPartial<T>` / `Merge<A, B>`
+* 高阶条件类型、对象类型工具
+* **无任何运行时代码**，仅用于类型系统
+
+### core
+
+* `isNil` / `isDef` / `assert`
+* `noop` / `sleep` / `once`
+* Browser / Node 通用
+
+### object / array / string
+
+* 数据结构操作
+* 表单、表格、配置处理常用能力
+
+### function / async
+
+* `debounce` / `throttle`
+* `retry` / `parallelLimit`
+
+---
+
+## 📥 安装
 
 ```bash
-pnpm run build
+pnpm add type-kit
+# or
+npm install type-kit
 ```
 
-Build the library in watch mode:
+---
 
-```bash
-pnpm run dev
+## 🧠 使用示例
+
+### 类型工具
+
+```ts
+import type { DeepPartial, Nullable } from 'type-kit'
+
+interface User {
+  id: number
+  name: string
+}
+
+const user: DeepPartial<User> = {
+  name: 'Alice'
+}
 ```
+
+### 函数工具
+
+```ts
+import { isNil, sleep } from 'type-kit'
+
+if (!isNil(value)) {
+  await sleep(300)
+}
+```
+
+### 按模块导入（推荐）
+
+```ts
+import { groupBy } from 'type-kit/array'
+import type { ValueOf } from 'type-kit/type'
+```
+
+---
+
+## 🧩 设计原则
+
+* ✅ **Type First**：类型设计优先于实现
+* ✅ **纯函数优先**：无副作用、易测试
+* ✅ **模块化导出**：天然支持 Tree-shaking
+* ✅ **零业务依赖**：不绑定任何具体业务场景
+
+---
+
+## 🛠️ 技术栈（Tooling & Infrastructure）
+
+本项目采用 **全量现代 TypeScript 工程化工具链**，强调一致性、可维护性与长期演进能力。
+
+### 核心语言与运行时
+
+* **TypeScript (100%)** —— 所有源码与类型定义均基于 TS
+* **ESM First** —— 原生 ES Module，面向未来标准
+
+### 构建与发布
+
+* **Rslib** —— 现代库构建工具，支持多格式输出（ESM / DTS）
+* **Vite** —— 本地开发与文档构建
+* **VitePress
+
+## 📌 Roadmap
+
+* [ ] 完善类型工具覆盖面
+* [ ] 引入类型测试（tsd / dtslint）
+* [ ] Browser / Node 子包拆分
+* [ ] 文档站点（VitePress）
+
+---
+
+## 🤝 贡献规范
+
+* 所有导出 API 必须具备完整类型签名
+* 禁止隐式 any
+* 新增工具需附带示例与说明
+
+---
+
+## 📄 License
+
+MIT License
+
+---
+
+> **Type Kit**
+>
+> *A clean, type-first utility toolkit for modern TypeScript projects.*
