@@ -1,5 +1,5 @@
 {
-  "name": "lemon-type-kit",
+  "name": "@lemon/type-kit",
   "version": "1.0.0",
   "type": "module",
   "exports": {
