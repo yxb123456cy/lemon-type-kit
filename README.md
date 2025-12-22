@@ -164,7 +164,7 @@ dateUtils.getCurrentDate(); // Date object
     ```bash
     git push origin feat/your-feature-name
     ```
-6.  **提交 PR**: 在 GitHub 上发起 Pull Request
+6.  **提交 PR**: 在 GitHub或Gitee 上发起 Pull Request
 
 ---
 
