@@ -1,45 +1,113 @@
-# This workflow will run tests using node and then publish a package to GitHub Packages when a release is created
-# For more information see: https://docs.github.com/en/actions/publishing-packages/publishing-nodejs-packages
-
+# This workflow will run tests using node and then publish a package to npm registry when a release is created
 name: Node.js Package
 
+# 触发规则：1. 创建Release 2. 推送v开头的Tag（兼容自动打Tag场景）
 on:
   release:
     types: [created]
+  push:
+    tags:
+      - "v*" # 推v开头的Tag自动触发（适配standard-version打Tag后推送）
+
+# 全局环境变量（统一配置）
+env:
+  NODE_VERSION: 22
+  PNPM_VERSION: 10
 
 jobs:
   build:
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v4
-      - uses: pnpm/action-setup@v4
+      - name: 拉取完整Git历史（解决standard-version/构建依赖git信息）
+        uses: actions/checkout@v4
         with:
-          version: 10
-      - uses: actions/setup-node@v4
+          fetch-depth: 0 # 关键：拉取所有提交记录，避免构建/版本检测失败
+
+      - name: 安装pnpm
+        uses: pnpm/action-setup@v4
         with:
-          node-version: 22
-          cache: 'pnpm'
-      - run: pnpm install
-      - run: pnpm run type-check
-      - run: pnpm run format
-      - run: pnpm run check
-      - run: pnpm run test
+          version: ${{ env.PNPM_VERSION }}
+          run_install: false # 手动控制安装时机，避免重复
+
+      - name: 配置Node.js环境
+        uses: actions/setup-node@v4
+        with:
+          node-version: ${{ env.NODE_VERSION }}
+          cache: "pnpm" # 缓存pnpm依赖，加速构建
+          cache-dependency-path: "pnpm-lock.yaml" # 指定锁文件路径
+
+      - name: 安装依赖
+        run: pnpm install --frozen-lockfile # 严格按锁文件安装，等同于npm ci
+
+      - name: 类型检查
+        run: pnpm run type-check
+
+      - name: 代码格式化检查
+        run: pnpm run format
+
+      - name: 代码质量检查
+        run: pnpm run check
+
+      - name: 单元测试
+        run: pnpm run test
 
   publish-npm:
-    needs: build
+    needs: build # 依赖build任务成功
     runs-on: ubuntu-latest
+    permissions:
+      contents: read # 最小权限原则
     steps:
-      - uses: actions/checkout@v4
-      - uses: pnpm/action-setup@v4
+      - name: 拉取完整Git历史
+        uses: actions/checkout@v4
         with:
-          version: 10
-      - uses: actions/setup-node@v4
+          fetch-depth: 0
+
+      - name: 安装pnpm
+        uses: pnpm/action-setup@v4
         with:
-          node-version: 22
-          registry-url: https://registry.npmjs.org/
-          cache: 'pnpm'
-      - run: pnpm install
-      - run: pnpm run build
-      - run: pnpm publish --no-git-checks
+          version: ${{ env.PNPM_VERSION }}
+          run_install: false
+
+      - name: 配置Node.js环境（关联npm registry）
+        uses: actions/setup-node@v4
+        with:
+          node-version: ${{ env.NODE_VERSION }}
+          registry-url: https://registry.npmjs.org/ # npm官方源
+          cache: "pnpm"
+          cache-dependency-path: "pnpm-lock.yaml"
+
+      - name: 安装依赖
+        run: pnpm install --frozen-lockfile
+
+      - name: 构建产物
+        run: pnpm run build
+
+      - name: 校验版本一致性（Release/Tag版本 vs package.json）
+        run: |
+          # 提取Tag/Release版本（去掉v前缀）
+          RELEASE_VERSION=${{ github.ref_name }}
+          CLEAN_VERSION=${RELEASE_VERSION#v}
+          # 提取package.json版本
+          PACKAGE_VERSION=$(node -p "require('./package.json').version")
+          # 校验版本一致
+          if [ "$CLEAN_VERSION" != "$PACKAGE_VERSION" ]; then
+            echo "❌ 版本不一致：Release/Tag版本($CLEAN_VERSION) ≠ package.json版本($PACKAGE_VERSION)"
+            exit 1
+          fi
+          echo "✅ 版本校验通过：$PACKAGE_VERSION"
+
+      - name: 发布到npm（公有作用域包）
+        run: pnpm publish --no-git-checks --access public
         env:
-          NODE_AUTH_TOKEN: ${{secrets.npm_token}}
+          # 核心：pnpm publish优先使用NPM_TOKEN环境变量（兼容npm的NODE_AUTH_TOKEN）
+          NPM_TOKEN: ${{ secrets.npm_token }}
+          # 兜底：保留NODE_AUTH_TOKEN，适配部分pnpm版本
+          NODE_AUTH_TOKEN: ${{ secrets.npm_token }}
+
+      - name: 发布失败通知（可选）
+        if: failure()
+        run: |
+          echo "❌ 发布失败！请检查："
+          echo "1. npm_token是否有效（未过期/权限足够）"
+          echo "2. @lemondev组织是否在npm官网创建"
+          echo "3. 版本号是否已发布过"
