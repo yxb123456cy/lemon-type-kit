@@ -1,176 +1,137 @@
-# 🍋 Type Kit
+# 🍋 @lemondev/type-kit
 
-**Type Kit** 是一个 **通用、现代化的 TypeScript 类型与工具函数库**，专注于为前端与 Node.js 项目提供 **强类型、可复用、可组合的基础能力**。
-
-该项目遵循 **Type-first / 零业务依赖 / 模块化导出** 的设计理念，适用于 **任何使用 TypeScript 的项目或团队**，既可作为企业内共享基础库，也可作为独立 npm 包使用。
+> **@lemondev/type-kit** 是一个通用的 TypeScript 工具函数库，目标是成为 TypeScript 界的 **Hutool**。
+>
+> 专注于为前端与 Node.js 项目提供 **强类型、可复用、可组合的基础能力**。
 
 ---
 
 ## 🚀 项目定位
 
-> 一个 **工程级、可 Tree-shaking 的 TypeScript 基础工具库**
-
-* 🧩 高质量 **Type Utilities（类型工具）**
-* 🧱 常用 **Runtime Utilities（函数工具）**
-* 🔄 同时支持 Browser 与 Node.js 环境
-* 📦 支持按模块导入，避免无用代码
-* 🧠 类型即文档（Type as Documentation）
+*   🧩 **全能工具箱**：涵盖数组、字符串、数字、日期等常用操作
+*   💪 **Type-first**：所有函数具备完善的 TypeScript 类型定义
+*   🌲 **Tree-shaking**：支持按需引入，体积轻量
+*   🌍 **跨平台**：同时支持 Browser 与 Node.js 环境
 
 ---
 
-## 📦 适用场景
-
-* Vue / React / Svelte 等前端项目
-* Node.js / BFF / CLI 工具
-* Monorepo 中的 shared 基础包
-* 中大型 TypeScript 工程
-* 企业级前后端统一工具库
-
----
-
-## 📁 目录结构
-
-```txt
-type-kit
-├─ core/            # 核心基础函数（零依赖）
-├─ type/            # 纯 TypeScript 类型工具（无 runtime）
-├─ object/          # 对象操作
-├─ array/           # 数组工具
-├─ string/          # 字符串处理
-├─ number/          # 数值工具
-├─ date/            # 日期时间
-├─ function/        # 函数增强
-├─ async/           # 异步控制
-├─ collection/      # 集合工具
-├─ validation/      # 校验工具
-├─ env/             # 运行环境判断
-├─ browser/         # 浏览器专用能力
-├─ storage/         # 本地存储封装
-├─ network/         # 网络辅助方法
-└─ index.ts
-```
-
----
-
-## 📚 核心模块说明
-
-### type（⭐ 核心模块）
-
-* `Nullable<T>` / `DeepPartial<T>` / `Merge<A, B>`
-* 高阶条件类型、对象类型工具
-* **无任何运行时代码**，仅用于类型系统
-
-### core
-
-* `isNil` / `isDef` / `assert`
-* `noop` / `sleep` / `once`
-* Browser / Node 通用
-
-### object / array / string
-
-* 数据结构操作
-* 表单、表格、配置处理常用能力
-
-### function / async
-
-* `debounce` / `throttle`
-* `retry` / `parallelLimit`
-
----
-
-## 📥 安装
+## 📦 安装
 
 ```bash
-pnpm add type-kit
-# or
-npm install type-kit
+# pnpm
+pnpm install @lemondev/type-kit -D
+
+# npm
+npm install @lemondev/type-kit -D
+
+# yarn
+yarn add @lemondev/type-kit -D
 ```
 
 ---
 
-## 🧠 使用示例
+## � 核心模块
 
-### 类型工具
+目前包含以下核心模块，更多功能持续扩充中：
+
+### 🛠️ Array Utils (数组工具)
 
 ```ts
-import type { DeepPartial, Nullable } from 'type-kit'
+import { arrayUtils } from '@lemondev/type-kit';
 
-interface User {
-  id: number
-  name: string
-}
+// 去重
+arrayUtils.unique([1, 2, 2, 3]); // [1, 2, 3]
 
-const user: DeepPartial<User> = {
-  name: 'Alice'
-}
+// 分块
+arrayUtils.chunk(['a', 'b', 'c', 'd'], 2); // [['a', 'b'], ['c', 'd']]
+
+// 移除假值
+arrayUtils.compact([0, 1, false, 2, '']); // [1, 2]
+
+// 获取首尾元素
+arrayUtils.first([1, 2, 3]); // 1
+arrayUtils.last([1, 2, 3]); // 3
+
+// 打乱数组
+arrayUtils.shuffle([1, 2, 3, 4]);
 ```
 
-### 函数工具
+### � String Utils (字符串工具)
 
 ```ts
-import { isNil, sleep } from 'type-kit'
+import { stringUtils } from '@lemondev/type-kit';
 
-if (!isNil(value)) {
-  await sleep(300)
-}
+// 命名转换
+stringUtils.camelCase('foo-bar'); // 'fooBar'
+stringUtils.kebabCase('fooBar'); // 'foo-bar'
+stringUtils.pascalCase('foo bar'); // 'FooBar'
+stringUtils.snakeCase('fooBar'); // 'foo_bar'
+
+// 大小写转换
+stringUtils.capitalize('fred'); // 'Fred'
+stringUtils.upperFirst('fred'); // 'Fred'
+
+// 截断与修剪
+stringUtils.truncate('hi-diddly-ho there', 10); // 'hi-diddl...'
+stringUtils.trimSlash('/foo/bar/'); // 'foo/bar'
+
+// 随机字符串
+stringUtils.randomString(16); // 'x8k...'
+
+// 模板替换
+stringUtils.template('Hello {name}', { name: 'World' }); // 'Hello World'
+
+// HTML 转义
+stringUtils.escapeHtml('<div>'); // '&lt;div&gt;'
 ```
 
-### 按模块导入（推荐）
+### 🔢 Number Utils (数值工具)
 
 ```ts
-import { groupBy } from 'type-kit/array'
-import type { ValueOf } from 'type-kit/type'
+import { numberUtils } from '@lemondev/type-kit';
+
+// 类型转换
+numberUtils.toNumber('12.3'); // 12.3
+
+// 范围限制
+numberUtils.clamp(10, 0, 5); // 5
+
+// 随机数
+numberUtils.random(1, 5); // 1~5 之间的整数
+
+// 数值检查
+numberUtils.isEven(2); // true
+numberUtils.isOdd(3); // true
+numberUtils.inRange(3, 2, 4); // true
+
+// 统计计算
+numberUtils.sum([1, 2, 3]); // 6
+numberUtils.average([1, 2, 3]); // 2
+numberUtils.min([1, 2, 3]); // 1
+numberUtils.max([1, 2, 3]); // 3
+numberUtils.round(4.006, 2); // 4.01
+```
+
+### � Date Utils (日期工具)
+
+```ts
+import { dateUtils } from '@lemondev/type-kit';
+
+// 获取当前年份
+dateUtils.getCurrentYear(); // 2025
+
+// 获取当前日期对象
+dateUtils.getCurrentDate(); // Date object
 ```
 
 ---
 
-## 🧩 设计原则
+## 🤝 贡献
 
-* ✅ **Type First**：类型设计优先于实现
-* ✅ **纯函数优先**：无副作用、易测试
-* ✅ **模块化导出**：天然支持 Tree-shaking
-* ✅ **零业务依赖**：不绑定任何具体业务场景
-
----
-
-## 🛠️ 技术栈（Tooling & Infrastructure）
-
-本项目采用 **全量现代 TypeScript 工程化工具链**，强调一致性、可维护性与长期演进能力。
-
-### 核心语言与运行时
-
-* **TypeScript (100%)** —— 所有源码与类型定义均基于 TS
-* **ESM First** —— 原生 ES Module，面向未来标准
-
-### 构建与发布
-
-* **Rslib** —— 现代库构建工具，支持多格式输出（ESM / DTS）
-* **Vite** —— 本地开发与文档构建
-* **VitePress
-
-## 📌 Roadmap
-
-* [ ] 完善类型工具覆盖面
-* [ ] 引入类型测试（tsd / dtslint）
-* [ ] Browser / Node 子包拆分
-* [ ] 文档站点（VitePress）
-
----
-
-## 🤝 贡献规范
-
-* 所有导出 API 必须具备完整类型签名
-* 禁止隐式 any
-* 新增工具需附带示例与说明
+欢迎提交 Issue 和 Pull Request，共同打造 TypeScript 界的 Hutool！
 
 ---
 
 ## 📄 License
 
 MIT License
-
----
-
-> **Type Kit**
->
-> *A clean, type-first utility toolkit for modern TypeScript projects.*
