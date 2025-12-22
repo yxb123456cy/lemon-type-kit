@@ -1,6 +1,7 @@
 {
   "name": "@lemondev/type-kit",
-  "version": "1.0.0",
+  "version": "0.0.0",
+  "description": "A comprehensive utility library for TypeScript projects, powered by Lemon Dev.",
   "type": "module",
   "exports": {
     ".": {
@@ -10,6 +11,7 @@
     }
   },
   "main": "./dist/index.cjs",
+  "module": "./dist/index.js",
   "types": "./dist/index.d.ts",
   "files": [
     "dist"
@@ -20,18 +22,32 @@
     "check": "biome check --write",
     "dev": "rslib build --watch",
     "format": "biome format --write",
-    "test": "vitest",
-    "test:unit": "vitest run",
+    "test": "vitest run",
+    "test:watch": "vitest",
     "commit": "git-cz",
-    "release:changelog:major": "standard-version --release-as major",
-    "release:changelog:minor": "standard-version --release-as minor",
-    "release:changelog:patch": "standard-version --release-as patch",
+    "release:major": "standard-version --release-as major",
+    "release:minor": "standard-version --release-as minor",
+    "release:patch": "standard-version --release-as patch",
     "prepare": "husky"
   },
+  "keywords": [
+    "typescript",
+    "utils",
+    "library",
+    "helper",
+    "common",
+    "array",
+    "string",
+    "number",
+    "date"
+  ],
+  "author": "Lemon Dev",
+  "license": "MIT",
   "devDependencies": {
     "@biomejs/biome": "2.3.8",
     "@commitlint/cli": "^20.2.0",
     "@commitlint/config-conventional": "^20.2.0",
+    "@microsoft/api-extractor": "^7.55.2",
     "@rslib/core": "^0.18.4",
     "@types/node": "^24.10.1",
     "cz-git": "^1.12.0",
@@ -53,5 +69,11 @@
       "biome format --write"
     ]
   },
-  "private": true
+  "publishConfig": {
+    "access": "public"
+  },
+  "engines": {
+    "node": ">=18.0.0"
+  },
+  "sideEffects": false
 }

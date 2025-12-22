@@ -4,12 +4,27 @@ export default defineConfig({
   lib: [
     {
       format: 'esm',
-      syntax: ['node 18'],
-      dts: true,
+      syntax: 'es2020',
+      dts: {
+        bundle: true,
+      },
     },
     {
       format: 'cjs',
-      syntax: ['node 18'],
+      syntax: 'es2020',
     },
   ],
+  source: {
+    entry: {
+      index: './src/index.ts',
+    },
+    tsconfigPath: './tsconfig.json',
+  },
+  output: {
+    target: 'node',
+    distPath: {
+      root: './dist',
+    },
+    cleanDistPath: true,
+  },
 });
