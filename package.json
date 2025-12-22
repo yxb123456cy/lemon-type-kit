@@ -1,6 +1,6 @@
 {
   "name": "@lemondev/type-kit",
-  "version": "0.1.1",
+  "version": "0.1.2",
   "description": "A comprehensive utility library for TypeScript projects, powered by Lemon Dev.",
   "type": "module",
   "exports": {
