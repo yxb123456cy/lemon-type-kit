@@ -1,4 +1,4 @@
-export * from './array';
-export * from './number';
-export * from './string';
-export const squared = (n: number): number => n * n;
+export { arrayUtils } from './array';
+export { dateUtils } from './date';
+export { numberUtils } from './number';
+export { stringUtils } from './string';

@@ -9,7 +9,7 @@
  * camelCase('--foo-bar--') // 'fooBar'
  * camelCase('__FOO_BAR__') // 'fooBar'
  */
-export function camelCase(str: string): string {
+function camelCase(str: string): string {
   if (!str) return '';
   return str
     .replace(/^[^a-zA-Z0-9]+|[^a-zA-Z0-9]+$/g, '')
@@ -35,7 +35,7 @@ export function camelCase(str: string): string {
  * kebabCase('Foo Bar') // 'foo-bar'
  * kebabCase('__FOO_BAR__') // 'foo-bar'
  */
-export function kebabCase(str: string): string {
+function kebabCase(str: string): string {
   if (!str) return '';
   return str
     .replace(/^[^a-zA-Z0-9]+|[^a-zA-Z0-9]+$/g, '')
@@ -54,7 +54,7 @@ export function kebabCase(str: string): string {
  * capitalize('fred') // 'Fred'
  * capitalize('FRED') // 'Fred'
  */
-export function capitalize(str: string): string {
+function capitalize(str: string): string {
   if (!str) return '';
   return str.charAt(0).toUpperCase() + str.slice(1).toLowerCase();
 }
@@ -69,7 +69,7 @@ export function capitalize(str: string): string {
  * pascalCase('foo bar') // 'FooBar'
  * pascalCase('foo-bar') // 'FooBar'
  */
-export function pascalCase(str: string): string {
+function pascalCase(str: string): string {
   const camel = camelCase(str);
   return camel.charAt(0).toUpperCase() + camel.slice(1);
 }
@@ -84,7 +84,7 @@ export function pascalCase(str: string): string {
  * snakeCase('fooBar') // 'foo_bar'
  * snakeCase('foo-bar') // 'foo_bar'
  */
-export function snakeCase(str: string): string {
+function snakeCase(str: string): string {
   if (!str) return '';
   return str
     .replace(/^[^a-zA-Z0-9]+|[^a-zA-Z0-9]+$/g, '')
@@ -103,7 +103,7 @@ export function snakeCase(str: string): string {
  * upperFirst('fred') // 'Fred'
  * upperFirst('FRED') // 'FRED'
  */
-export function upperFirst(str: string): string {
+function upperFirst(str: string): string {
   if (!str) return '';
   return str.charAt(0).toUpperCase() + str.slice(1);
 }
@@ -118,7 +118,7 @@ export function upperFirst(str: string): string {
  * lowerFirst('Fred') // 'fred'
  * lowerFirst('FRED') // 'fRED'
  */
-export function lowerFirst(str: string): string {
+function lowerFirst(str: string): string {
   if (!str) return '';
   return str.charAt(0).toLowerCase() + str.slice(1);
 }
@@ -132,7 +132,7 @@ export function lowerFirst(str: string): string {
  * @example
  * trimSlash('/foo/bar/') // 'foo/bar'
  */
-export function trimSlash(str: string): string {
+function trimSlash(str: string): string {
   return str.replace(/^\/+|\/+$/g, '');
 }
 
@@ -147,11 +147,7 @@ export function trimSlash(str: string): string {
  * @example
  * truncate('hi-diddly-ho there, neighborino', 24) // 'hi-diddly-ho there, n...'
  */
-export function truncate(
-  str: string,
-  length: number,
-  omission = '...',
-): string {
+function truncate(str: string, length: number, omission = '...'): string {
   if (str.length <= length) return str;
   return str.slice(0, length - omission.length) + omission;
 }
@@ -163,7 +159,7 @@ export function truncate(
  * @param length - The length of the string / 字符串长度，默认为 16
  * @returns The random string / 随机字符串
  */
-export function randomString(length = 16): string {
+function randomString(length = 16): string {
   const chars =
     'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789';
   let result = '';
@@ -183,7 +179,7 @@ export function randomString(length = 16): string {
  * @example
  * template('Hello {name}', { name: 'World' }) // 'Hello World'
  */
-export function template(str: string, data: Record<string, unknown>): string {
+function template(str: string, data: Record<string, unknown>): string {
   return str.replace(/\{(\w+)\}/g, (_, key) => {
     return data[key] !== undefined ? String(data[key]) : '';
   });
@@ -198,7 +194,7 @@ export function template(str: string, data: Record<string, unknown>): string {
  * @example
  * reverse('abc') // 'cba'
  */
-export function reverse(str: string): string {
+function reverse(str: string): string {
   return str.split('').reverse().join('');
 }
 
@@ -211,7 +207,7 @@ export function reverse(str: string): string {
  * @example
  * stripTags('<p>Hello</p>') // 'Hello'
  */
-export function stripTags(str: string): string {
+function stripTags(str: string): string {
   return str.replace(/<[^>]*>/g, '');
 }
 
@@ -224,7 +220,7 @@ export function stripTags(str: string): string {
  * @example
  * escapeHtml('<div>') // '&lt;div&gt;'
  */
-export function escapeHtml(str: string): string {
+function escapeHtml(str: string): string {
   const map: Record<string, string> = {
     '&': '&amp;',
     '<': '&lt;',
@@ -244,7 +240,7 @@ export function escapeHtml(str: string): string {
  * @example
  * unescapeHtml('&lt;div&gt;') // '<div>'
  */
-export function unescapeHtml(str: string): string {
+function unescapeHtml(str: string): string {
   const map: Record<string, string> = {
     '&amp;': '&',
     '&lt;': '<',
@@ -254,3 +250,21 @@ export function unescapeHtml(str: string): string {
   };
   return str.replace(/&amp;|&lt;|&gt;|&quot;|&#39;/g, (m) => map[m]);
 }
+
+export const stringUtils = {
+  camelCase,
+  kebabCase,
+  capitalize,
+  pascalCase,
+  snakeCase,
+  upperFirst,
+  lowerFirst,
+  trimSlash,
+  truncate,
+  randomString,
+  template,
+  reverse,
+  stripTags,
+  escapeHtml,
+  unescapeHtml,
+};

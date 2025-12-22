@@ -14,7 +14,7 @@
  * toNumber(null) // 0 (Standard Number behavior)
  * toNumber(undefined) // NaN
  */
-export function toNumber(value: unknown): number {
+function toNumber(value: unknown): number {
   if (typeof value === 'number') {
     return value;
   }
@@ -41,7 +41,7 @@ export function toNumber(value: unknown): number {
  * clamp(-5, 0, 5) // 0
  * clamp(3, 0, 5) // 3
  */
-export function clamp(num: number, min: number, max: number): number {
+function clamp(num: number, min: number, max: number): number {
   if (min > max) {
     throw new Error('min must be less than or equal to max');
   }
@@ -58,7 +58,7 @@ export function clamp(num: number, min: number, max: number): number {
  * @example
  * random(1, 5) // 1, 2, 3, 4, or 5
  */
-export function random(min: number, max: number): number {
+function random(min: number, max: number): number {
   if (min > max) {
     throw new Error('min must be less than or equal to max');
   }
@@ -77,7 +77,7 @@ export function random(min: number, max: number): number {
  * isEven(2) // true
  * isEven(3) // false
  */
-export function isEven(num: number): boolean {
+function isEven(num: number): boolean {
   return num % 2 === 0;
 }
 
@@ -91,7 +91,7 @@ export function isEven(num: number): boolean {
  * isOdd(2) // false
  * isOdd(3) // true
  */
-export function isOdd(num: number): boolean {
+function isOdd(num: number): boolean {
   return num % 2 !== 0;
 }
 
@@ -106,7 +106,7 @@ export function isOdd(num: number): boolean {
  * isPositive(-1) // false
  * isPositive(0) // false
  */
-export function isPositive(num: number): boolean {
+function isPositive(num: number): boolean {
   return num > 0;
 }
 
@@ -121,7 +121,7 @@ export function isPositive(num: number): boolean {
  * isNegative(1) // false
  * isNegative(0) // false
  */
-export function isNegative(num: number): boolean {
+function isNegative(num: number): boolean {
   return num < 0;
 }
 
@@ -134,7 +134,7 @@ export function isNegative(num: number): boolean {
  * @example
  * sum([1, 2, 3]) // 6
  */
-export function sum(numbers: number[]): number {
+function sum(numbers: number[]): number {
   return numbers.reduce((a, b) => a + b, 0);
 }
 
@@ -147,7 +147,7 @@ export function sum(numbers: number[]): number {
  * @example
  * average([1, 2, 3]) // 2
  */
-export function average(numbers: number[]): number {
+function average(numbers: number[]): number {
   if (numbers.length === 0) return 0;
   return sum(numbers) / numbers.length;
 }
@@ -161,7 +161,7 @@ export function average(numbers: number[]): number {
  * @example
  * min([1, 2, 3]) // 1
  */
-export function min(numbers: number[]): number {
+function min(numbers: number[]): number {
   if (numbers.length === 0) return Number.POSITIVE_INFINITY;
   return Math.min(...numbers);
 }
@@ -175,7 +175,7 @@ export function min(numbers: number[]): number {
  * @example
  * max([1, 2, 3]) // 3
  */
-export function max(numbers: number[]): number {
+function max(numbers: number[]): number {
   if (numbers.length === 0) return Number.NEGATIVE_INFINITY;
   return Math.max(...numbers);
 }
@@ -193,7 +193,7 @@ export function max(numbers: number[]): number {
  * inRange(4, 8, 2) // true
  * inRange(2, 2, 4) // true
  */
-export function inRange(num: number, min: number, max: number): boolean {
+function inRange(num: number, min: number, max: number): boolean {
   const start = Math.min(min, max);
   const end = Math.max(min, max);
   return num >= start && num <= end;
@@ -211,7 +211,23 @@ export function inRange(num: number, min: number, max: number): boolean {
  * round(4.006, 2) // 4.01
  * round(4060, -2) // 4100
  */
-export function round(num: number, precision = 0): number {
+function round(num: number, precision = 0): number {
   const multiplier = 10 ** precision;
   return Math.round(num * multiplier) / multiplier;
 }
+
+export const numberUtils = {
+  toNumber,
+  clamp,
+  random,
+  isEven,
+  isOdd,
+  isPositive,
+  isNegative,
+  sum,
+  average,
+  min,
+  max,
+  inRange,
+  round,
+};

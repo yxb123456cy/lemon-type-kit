@@ -7,7 +7,7 @@
  * @example
  * unique([1, 2, 2, 3]) // [1, 2, 3]
  */
-export function unique<T>(array: T[]): T[] {
+function unique<T>(array: T[]): T[] {
   return Array.from(new Set(array));
 }
 
@@ -22,7 +22,7 @@ export function unique<T>(array: T[]): T[] {
  * chunk(['a', 'b', 'c', 'd'], 2) // [['a', 'b'], ['c', 'd']]
  * chunk(['a', 'b', 'c', 'd'], 3) // [['a', 'b', 'c'], ['d']]
  */
-export function chunk<T>(array: T[], size: number): T[][] {
+function chunk<T>(array: T[], size: number): T[][] {
   if (size <= 0) return [];
   const result: T[][] = [];
   for (let i = 0; i < array.length; i += size) {
@@ -42,9 +42,7 @@ export function chunk<T>(array: T[], size: number): T[][] {
  * @example
  * compact([0, 1, false, 2, '', 3]) // [1, 2, 3]
  */
-export function compact<T>(
-  array: (T | null | undefined | false | '' | 0)[],
-): T[] {
+function compact<T>(array: (T | null | undefined | false | '' | 0)[]): T[] {
   return array.filter((item): item is T => Boolean(item));
 }
 
@@ -57,7 +55,7 @@ export function compact<T>(
  * @example
  * last([1, 2, 3]) // 3
  */
-export function last<T>(array: T[]): T | undefined {
+function last<T>(array: T[]): T | undefined {
   return array[array.length - 1];
 }
 
@@ -70,7 +68,7 @@ export function last<T>(array: T[]): T | undefined {
  * @example
  * first([1, 2, 3]) // 1
  */
-export function first<T>(array: T[]): T | undefined {
+function first<T>(array: T[]): T | undefined {
   return array[0];
 }
 
@@ -83,7 +81,7 @@ export function first<T>(array: T[]): T | undefined {
  * @example
  * shuffle([1, 2, 3, 4]) // [4, 1, 3, 2]
  */
-export function shuffle<T>(array: T[]): T[] {
+function shuffle<T>(array: T[]): T[] {
   const result = [...array];
   for (let i = result.length - 1; i > 0; i--) {
     const j = Math.floor(Math.random() * (i + 1));
@@ -91,3 +89,12 @@ export function shuffle<T>(array: T[]): T[] {
   }
   return result;
 }
+
+export const arrayUtils = {
+  unique,
+  chunk,
+  compact,
+  last,
+  first,
+  shuffle,
+};
