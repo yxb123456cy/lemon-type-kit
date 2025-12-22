@@ -19,6 +19,7 @@
   "scripts": {
     "type-check": "tsc --noEmit",
     "build": "rslib build",
+    "build:doctor": "cross-env RSDOCTOR=true npm run build",
     "check": "biome check --write",
     "dev": "rslib build --watch",
     "format": "biome format --write",
@@ -48,8 +49,10 @@
     "@commitlint/cli": "^20.2.0",
     "@commitlint/config-conventional": "^20.2.0",
     "@microsoft/api-extractor": "^7.55.2",
+    "@rsdoctor/rspack-plugin": "^1.3.16",
     "@rslib/core": "^0.18.4",
     "@types/node": "^24.10.1",
+    "cross-env": "^10.1.0",
     "cz-git": "^1.12.0",
     "husky": "^9.1.7",
     "lint-staged": "^16.2.7",
