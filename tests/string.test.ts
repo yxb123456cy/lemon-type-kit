@@ -15,7 +15,7 @@ import {
   truncate,
   unescapeHtml,
   upperFirst,
-} from '../index';
+} from '../src/string/index';
 
 describe('string utils', () => {
   describe('camelCase', () => {

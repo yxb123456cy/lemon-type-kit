@@ -1,5 +1,5 @@
 import { describe, expect, it } from 'vitest';
-import { getCurrentDate, getCurrentYear } from '..';
+import { getCurrentDate, getCurrentYear } from '../src/date/index';
 
 describe('date utils', () => {
   describe('getCurrentYear', () => {

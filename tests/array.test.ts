@@ -1,5 +1,5 @@
 import { describe, expect, it } from 'vitest';
-import { chunk, compact, first, last, shuffle, unique } from '../index';
+import { chunk, compact, first, last, shuffle, unique } from '../src/array/index';
 
 describe('array utils', () => {
   describe('unique', () => {

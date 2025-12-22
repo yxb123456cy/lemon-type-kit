@@ -13,7 +13,7 @@ import {
   round,
   sum,
   toNumber,
-} from '../index';
+} from '../src/number/index';
 
 describe('number utils', () => {
   describe('toNumber', () => {
