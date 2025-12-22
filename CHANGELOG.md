@@ -3,11 +3,15 @@
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
 ### [0.1.6](https://gitee.com/xiaoye123cy/lemon-type-kit/compare/v0.1.5...v0.1.6) (2025-12-22)
+### [0.1.6](https://github.com/yxb123456cy/lemon-type-kit/compare/v0.1.5...v0.1.6) (2025-12-22)
+>>>>>>> e018aa95624a8e7614eefa773392d8a19e6b66c8
 
 
 ### Features
 
 * add log modules ([8f43e18](https://gitee.com/xiaoye123cy/lemon-type-kit/commit/8f43e18b3a0085da774f20477c5dc891b6b77e1f))
+* **modules:** :sparkles: add cache modules ([f0f07e1](https://github.com/yxb123456cy/lemon-type-kit/commit/f0f07e18c89a6ba4d13f9819b0aea4ea0f34fa8f))
+>>>>>>> e018aa95624a8e7614eefa773392d8a19e6b66c8
 
 ### [0.1.5](https://github.com/yxb123456cy/lemon-type-kit/compare/v0.1.4...v0.1.5) (2025-12-22)
 
