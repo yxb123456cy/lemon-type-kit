@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [0.1.6](https://github.com/yxb123456cy/lemon-type-kit/compare/v0.1.5...v0.1.6) (2025-12-22)
+
+
+### Features
+
+* **modules:** :sparkles: add cache modules ([f0f07e1](https://github.com/yxb123456cy/lemon-type-kit/commit/f0f07e18c89a6ba4d13f9819b0aea4ea0f34fa8f))
+
 ### [0.1.5](https://github.com/yxb123456cy/lemon-type-kit/compare/v0.1.4...v0.1.5) (2025-12-22)
 
 
