@@ -29,7 +29,10 @@
     "release:major": "standard-version --release-as major",
     "release:minor": "standard-version --release-as minor",
     "release:patch": "standard-version --release-as patch",
-    "prepare": "husky"
+    "prepare": "husky",
+    "docs:dev": "vitepress dev docs",
+    "docs:build": "vitepress build docs",
+    "docs:preview": "vitepress preview docs"
   },
   "keywords": [
     "typescript",
@@ -58,6 +61,7 @@
     "lint-staged": "^16.2.7",
     "standard-version": "^9.5.0",
     "typescript": "^5.9.3",
+    "vitepress": "2.0.0-alpha.15",
     "vitest": "^4.0.15"
   },
   "config": {
