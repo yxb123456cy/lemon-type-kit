@@ -1,5 +1,5 @@
 import { describe, expect, it } from "vitest";
-import { phoneUtil } from "../src/phoneUtil";
+import { phoneUtil } from "../src/index";
 
 describe("phoneUtil", () => {
   describe("hideAfter", () => {

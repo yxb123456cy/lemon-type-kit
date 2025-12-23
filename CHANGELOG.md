@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [0.1.9](https://gitee.com/xiaoye123cy/lemon-type-kit/compare/v0.1.8...v0.1.9) (2025-12-23)
+
+
+### Features
+
+* add phoneUtil module and update index ([c93a379](https://gitee.com/xiaoye123cy/lemon-type-kit/commit/c93a37944526ca24197961068238ba62f352c6d6))
+
 ### [0.1.8](https://gitee.com/xiaoye123cy/lemon-type-kit/compare/v0.1.7...v0.1.8) (2025-12-23)
 
 ### [0.1.7](https://github.com/yxb123456cy/lemon-type-kit/compare/v0.1.6...v0.1.7) (2025-12-22)
