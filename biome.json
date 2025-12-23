@@ -12,6 +12,12 @@
     "clientKind": "git",
     "useIgnoreFile": true
   },
+  "files":{
+    "includes": [
+      "src/**/*.{js,jsx,ts,tsx,json}",
+      "tests/**/*.{js,jsx,ts,tsx,json}"
+    ]
+  },
   "formatter": {
     "indentStyle": "space"
   },
