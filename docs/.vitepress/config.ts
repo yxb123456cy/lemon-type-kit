@@ -30,6 +30,7 @@ export default defineConfig({
           { text: "String Utils", link: "/api/string" },
           { text: "Cache Utils", link: "/api/cache" },
           { text: "Log Utils", link: "/api/log" },
+          { text: "Phone Utils", link: "/api/phone" },
         ],
       },
     ],
