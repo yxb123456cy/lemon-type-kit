@@ -5,17 +5,13 @@ const store = new Map<string, { value: unknown; expire: number | null }>();
 
 /**
  * @description 设置缓存
+ * @author (轻叶)
  * @param key - 缓存键
  * @param value - 缓存值
  * @param ttl - 过期时间（毫秒），如果不传或传 0/负数则表示永不过期
  * @returns void
- *
- * @example
- * // 设置不过期的缓存
- * set('name', 'lemon');
- *
- * // 设置 5秒后过期的缓存
- * set('token', 'xyz', 5000);
+ * @Date 2025-12-23
+ * @example set('token', 'xyz', 5000);
  */
 function set(key: string, value: unknown, ttl: number = 0): void {
   // 计算过期时间戳
@@ -32,8 +28,11 @@ function set(key: string, value: unknown, ttl: number = 0): void {
 
 /**
  * @description 获取缓存
+ * @author (轻叶)
  * @param key - 缓存键
- * @returns 缓存值，如果不存在或已过期则返回 null
+ * @returns 缓存值，如果不存在或已过期则返回 null (unknown | null)
+ * @Date 2025-12-23
+ * @example get('token') // 'xyz'
  */
 function get(key: string): unknown | null {
   const data = store.get(key);
@@ -55,7 +54,11 @@ function get(key: string): unknown | null {
 
 /**
  * @description 移除缓存
+ * @author (轻叶)
  * @param key - 缓存键
+ * @returns void
+ * @Date 2025-12-23
+ * @example remove('token')
  */
 function remove(key: string): void {
   store.delete(key);
@@ -63,13 +66,15 @@ function remove(key: string): void {
 
 /**
  * @description 清空所有缓存
+ * @author (轻叶)
+ * @returns void
+ * @Date 2025-12-23
+ * @example clear()
  */
 function clear(): void {
   store.clear();
 }
-/**
- * @description 导出cacheUtils 缓存工具对象;
- */
+
 export const cacheUtils = {
   set,
   get,
